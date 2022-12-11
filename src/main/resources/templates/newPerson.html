@@ -9,7 +9,7 @@
 
 <body>
     <h1>Добавление нового пользователя</h1>
-    <form method="POST" th:action="@{/newperson}" th:object="${person}" id="newUserForm">
+    <form method="POST" th:action="@{/newperson}" th:object="${person}" id="newUserForm" enctype="multipart/form-data">
 
         <span class="validationError"
               th:if="${#fields.hasErrors('email')}"
@@ -40,12 +40,6 @@
               th:errors="*{role}">Role Error</span>
         <label for="role">Должность: </label>
         <input type="text" th:field="*{role}" id="role" /><br/>
-
-        <span class="validationError"
-              th:if="${#fields.hasErrors('university')}"
-              th:errors="*{university}">University Error</span>
-        <label for="university">Университет: </label>
-        <input type="text" th:field="*{university}" id="university" /><br/>
 
         <span class="validationError"
               th:if="${#fields.hasErrors('division')}"
@@ -83,12 +77,16 @@
         <label for="info">Дополнительная информация: </label>
         <textarea th:field="*{info}" id="info">Вставьте текст</textarea><br/>
 
-
-        <label for="photo">Фотография: </label>
-        <input type="file" name="photo" id="photo"/><br/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('photoReq')}"
+              th:errors="*{photoReq}">Photo Error</span>
+        <label for="photoReq">Фотография: </label>
+        <input type="file" name="photoReq" id="photoReq"/>
+        <br/>
 
         <input type="submit" value="Добавить пользователя">
         
     </form>
+
 </body>
 </html>

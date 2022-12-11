@@ -1,9 +1,10 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import jakarta.validation.Valid;
-import org.sfedueye.crudwebappsfedueye.web.model.NotAcceptedPerson;
-import org.sfedueye.crudwebappsfedueye.web.model.NotAcceptedPhoto;
-import org.sfedueye.crudwebappsfedueye.web.repository.NotAcceptedPersonRepository;
+import org.sfedueye.crudwebappsfedueye.web.service.PhotoValidator;
+import org.sfedueye.crudwebappsfedueye.web.model.Person;
+import org.sfedueye.crudwebappsfedueye.web.repository.PersonRepository;
+import org.sfedueye.crudwebappsfedueye.web.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +12,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/newperson")
 public class NewPersonController {
 
-    NotAcceptedPersonRepository notAcceptedPersonRepository;
+    private final PersonRepository notAcceptedPersonRepository;
+    private final PhotoValidator photoValidator;
+    private final PersonService personService;
 
-    public NewPersonController(NotAcceptedPersonRepository notAcceptedPersonRepository){
-        this.notAcceptedPersonRepository = notAcceptedPersonRepository;
+    public NewPersonController(PersonRepository personRepository,
+                               File uploadPhotoDir,
+                               PhotoValidator photoValidator,
+                               PersonService personService){
+        this.notAcceptedPersonRepository = personRepository;
+        this.photoValidator = photoValidator;
+        this.personService = personService;
     }
 
     @GetMapping
@@ -28,28 +40,26 @@ public class NewPersonController {
     }
 
     @ModelAttribute(name = "person")
-    public NotAcceptedPerson person(){
-        return new NotAcceptedPerson();
-    }
-
-    @ModelAttribute(name = "photo")
-    public NotAcceptedPhoto photo(){
-        return new NotAcceptedPhoto();
+    public Person person(){
+        return new Person();
     }
 
 
     @PostMapping
-    public String processPerson(@ModelAttribute("person") @Valid NotAcceptedPerson person,
+    public String processPerson(@ModelAttribute("person") @Valid Person person,
                                 Errors errors,
-                                @ModelAttribute("photo") NotAcceptedPhoto photo,
-                                SessionStatus sessionStatus){
+                                SessionStatus sessionStatus) throws IOException {
+
+        MultipartFile photo = person.getPhotoReq();
+        photoValidator.validate(photo, errors);
+
+        System.out.println(errors.getFieldErrors());
 
         if(errors.hasErrors()){
             return "newPerson";
         }
 
-        photo.setName("NotRealised");
-        person.setPhoto(photo);
+        personService.uploadPhoto(person);
 
         notAcceptedPersonRepository.save(person);
 

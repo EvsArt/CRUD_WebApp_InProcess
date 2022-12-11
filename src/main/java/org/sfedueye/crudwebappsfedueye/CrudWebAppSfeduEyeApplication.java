@@ -9,5 +9,4 @@ public class CrudWebAppSfeduEyeApplication {
     public static void main(String[] args) {
         SpringApplication.run(CrudWebAppSfeduEyeApplication.class, args);
     }
-
 }

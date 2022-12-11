@@ -2,11 +2,11 @@ package org.sfedueye.crudwebappsfedueye.web.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
-@Data
+import java.util.Date;
+
 @Entity
-@RequiredArgsConstructor
+@Data
 public class Photo {
 
     @Id
@@ -15,5 +15,20 @@ public class Photo {
     private long id;
 
     private String name;
+
+    private Date addingTime;
+
+    private boolean isAccepted;
+
+    @PrePersist
+    private void addingTime(){
+        this.addingTime = new Date();
+    }
+
+    public static Photo newPhotoWithName(String name){
+        Photo photo = new Photo();
+        photo.setName(name);
+        return photo;
+    }
 
 }
