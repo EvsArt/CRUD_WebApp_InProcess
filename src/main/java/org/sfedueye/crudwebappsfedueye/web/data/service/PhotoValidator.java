@@ -1,4 +1,4 @@
-package org.sfedueye.crudwebappsfedueye.web.service;
+package org.sfedueye.crudwebappsfedueye.web.data.service;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <title>Панель администрирования</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+
+    <div th:each="person: ${unacceptedList}">
+        <a th:href="'/person/' + ${person.id}">
+            <div>
+                <span th:text="${person.name}"></span>
+                <span th:text="${person.surname}"></span>
+                <span th:text="${person.email}"></span>
+            </div>
+        </a>
+    </div><br/><br/>
+
+    <div th:value="${unacceptedList.size()}"></div>
+
+</body>
+</html>

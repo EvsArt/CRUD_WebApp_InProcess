@@ -1,10 +1,10 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import jakarta.validation.Valid;
-import org.sfedueye.crudwebappsfedueye.web.service.PhotoValidator;
-import org.sfedueye.crudwebappsfedueye.web.model.Person;
-import org.sfedueye.crudwebappsfedueye.web.repository.PersonRepository;
-import org.sfedueye.crudwebappsfedueye.web.service.PersonService;
+import org.sfedueye.crudwebappsfedueye.web.data.service.PhotoValidator;
+import org.sfedueye.crudwebappsfedueye.web.data.model.Person;
+import org.sfedueye.crudwebappsfedueye.web.data.repository.PersonRepository;
+import org.sfedueye.crudwebappsfedueye.web.data.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,11 +50,8 @@ public class NewPersonController {
                                 Errors errors,
                                 SessionStatus sessionStatus) throws IOException {
 
-        MultipartFile photo = person.getPhotoReq();
-        photoValidator.validate(photo, errors);
 
-        System.out.println(errors.getFieldErrors());
-
+        photoValidator.validate(person.getPhotoReq(), errors);
         if(errors.hasErrors()){
             return "newPerson";
         }

@@ -1,4 +1,4 @@
-package org.sfedueye.crudwebappsfedueye.web.model;
+package org.sfedueye.crudwebappsfedueye.web.data.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +18,7 @@ public class Photo {
 
     private Date addingTime;
 
-    private boolean isAccepted;
+    private boolean accepted;
 
     @PrePersist
     private void addingTime(){

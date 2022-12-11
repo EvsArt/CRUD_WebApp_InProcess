@@ -1,7 +1,7 @@
-package org.sfedueye.crudwebappsfedueye.web.service;
+package org.sfedueye.crudwebappsfedueye.web.data.service;
 
-import org.sfedueye.crudwebappsfedueye.web.model.Person;
-import org.sfedueye.crudwebappsfedueye.web.model.Photo;
+import org.sfedueye.crudwebappsfedueye.web.data.model.Person;
+import org.sfedueye.crudwebappsfedueye.web.data.model.Photo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

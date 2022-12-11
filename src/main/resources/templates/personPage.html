@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+  <title>Профиль пользователя</title>
+  <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+
+<div>
+  Имя: <span th:text="${person.name}">Неизвестно</span><br>
+  Фамилия: <span th:text="${person.surname}">Неизвестно</span><br>
+  Отчество: <span th:text="${person.patronymic}">Неизвестно</span><br>
+  Почта: <span th:text="${person.email}">Неизвестно</span><br>
+  Должность: <span th:text="${person.role}">Неизвестно</span><br>
+  Подразделение: <span th:text="${person.division}">Неизвестно</span><br>
+  Факультет: <span th:text="${person.faculty}">Неизвестно</span><br>
+  Специальность: <span th:text="${person.specialization}">Неизвестно</span><br>
+  Курс: <span th:text="${person.course}">Неизвестно</span><br>
+  Номер группы: <span th:text="${person.groupNum}">Неизвестно</span><br>
+  Дополнительная информация: <span th:text="${person.info}">Неизвестно</span><br>
+  Время добавления: <span th:text="${person.addingTime}">Неизвестно</span><br>
+  
+  <img th:src="'/img/' + ${person.photo.name}" alt="" src="">
+  
+</div>
+
+</body>
+</html>
