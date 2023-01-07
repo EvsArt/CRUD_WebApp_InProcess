@@ -22,10 +22,17 @@
   Номер группы: <span th:text="${person.groupNum}">Неизвестно</span><br>
   Дополнительная информация: <span th:text="${person.info}">Неизвестно</span><br>
   Время добавления: <span th:text="${person.addingTime}">Неизвестно</span><br>
-  
-  <img th:src="'/img/' + ${person.photo.name}" alt="" src="">
+
+  <div th:if="${person.hasPhoto()}">
+    <img th:src="'/img/' + ${person.photo.name}" alt="" src="">
+  </div>
   
 </div>
+
+<a th:href="'/person/' + ${person.id} + '/edit'">Редактировать пользователя</a>
+<br>
+<a th:href="'/person/' + ${person.id} + '/delete'">Удалить пользователя</a>
+
 
 </body>
 </html>

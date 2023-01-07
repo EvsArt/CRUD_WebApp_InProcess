@@ -23,4 +23,18 @@ public class PersonController {
         return "personPage";
     }
 
+    @GetMapping("/{id}/edit")
+    public String personEdit(Model model,
+                             @PathVariable Long id){
+        model.addAttribute("person", personRepository.findById(id).get());
+        return "newPerson";
+    }
+
+    @GetMapping("/{id}/delete")
+
+    public String personDelete(@PathVariable Long id){
+        personRepository.deleteById(id);
+        return "redirect:/admin";
+    }
+
 }

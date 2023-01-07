@@ -1,17 +1,21 @@
 package org.sfedueye.crudwebappsfedueye.web.data.model;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
 
 @Entity
 @Data
+@RequiredArgsConstructor
 public class Photo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_generator")
-    @SequenceGenerator(name = "person_generator", sequenceName = "person_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_generator")
+    @SequenceGenerator(name = "photo_generator", sequenceName = "photo_seq", allocationSize = 1)
     private long id;
 
     private String name;

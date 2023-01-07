@@ -5,4 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PhotoRepository extends CrudRepository<Photo, Long> {
 
+    Photo findByName(String name);
+    boolean existsPhotoByName(String name);
+
 }

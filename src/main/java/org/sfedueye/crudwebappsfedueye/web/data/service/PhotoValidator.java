@@ -13,13 +13,10 @@ public class PhotoValidator implements Validator {
 
         MultipartFile file = (MultipartFile) uploadedFile;
 
-        if (file.getSize() == 0) {
-            errors.rejectValue("photoReq", "uploadForm.sizeIsNull",
-                    "Пожалуйста, прикрепите фото!");
-        } else if (file.getSize() > 10485760) {
+        if (file.getSize() > 10485760) {
             errors.rejectValue("photoReq", "uploadForm.sizeIsBig",
                     "Размер фото не должен превышать 10Мб");
-        } else if (!file.getContentType().split("/")[0].equals("image")){
+        } else if (!(file.getContentType().split("/")[0].equals("image") || file.getContentType().equals("application/octet-stream"))){
             errors.rejectValue("photoReq", "uploadForm.isNotAnImage",
                     "Пожалуйста, не прикрепляйте файлы, не являющиеся изображениями!");
         }

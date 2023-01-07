@@ -21,11 +21,11 @@ public class AdminController {
 
     @ModelAttribute(name = "unacceptedList")
     public List<Person> unacceptedList(){
-        List<Person> personList = personRepository.findAllByAcceptedIsTrue();
+        List<Person> personList = personRepository.findAllByAcceptedIsFalse();
         return personList.subList(0, Math.min(personList.size(), 30));
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String admin(){
         return "redirect:/admin/unacceptedlist";
     }

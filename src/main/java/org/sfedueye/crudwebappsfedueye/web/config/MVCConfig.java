@@ -15,6 +15,12 @@ public class MVCConfig implements WebMvcConfigurer {
     @Value("${upload.path}")
     private String uploadPath;
 
+//    @Override   // For showing new uploaded photos
+//    public void addResourceHandlers(ResourceHandlerRegistry registry){
+//        registry.addResourceHandler("/**")
+//                .addResourceLocations("file:" + uploadPath);
+//    }
+
     @Bean
     File uploadPhotoDir(){
         File uploadDir = new File(uploadPath);

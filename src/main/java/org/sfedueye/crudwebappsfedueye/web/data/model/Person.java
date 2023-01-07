@@ -19,19 +19,17 @@ public class Person {
     private long id;
 
     @Transient
-
     private MultipartFile photoReq;  // Field for getting photo from request
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Photo photo; // Field for Photo table
+    private Photo photo = null; // Field for Photo table
 
     private Date addingTime;
 
     private boolean accepted;
 
-    @PrePersist
-    private void addingTime(){
-        this.addingTime = new Date();
+    public boolean hasPhoto(){
+        return photo != null;
     }
 
 

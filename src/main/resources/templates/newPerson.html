@@ -3,90 +3,134 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
-    <title>Новый пользователь</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;700&family=Roboto&display=swap" rel="stylesheet">
+    <title>Добавление нового пользователя</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
-
 <body>
-    <h1>Добавление нового пользователя</h1>
-    <form method="POST" th:action="@{/newperson}" th:object="${person}" id="newUserForm" enctype="multipart/form-data">
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('email')}"
-              th:errors="*{email}">Email Error</span>
-        <label for="email">Почта sfedu: </label>
-        <input type="text" th:field="*{email}" id="email" /><br/>
+<div class="wrapper">
+    <main class="page">
+        <div class="page__form">
+            <h1 class="form__title">Добавление нового пользователя</h1>
+            <form class="form__fields" method="POST" th:action="@{/newperson}" th:object="${person}" id="newUserForm" enctype="multipart/form-data">
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('name')}"
-              th:errors="*{name}">Name Error</span>
-        <label for="name">Имя: </label>
-        <input type="text" th:field="*{name}" id="name" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                        th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}">Email Error</span>
+                    <label for="email">Почта sfedu: </label>
+                    <input type="text" th:field="*{email}" id="email" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('surname')}"
-              th:errors="*{surname}">Surname Error</span>
-        <label for="surname">Фамилия: </label>
-        <input type="text" th:field="*{surname}" id="surname" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}">Name Error</span>
+                    <label for="name">Имя: </label>
+                    <input type="text" th:field="*{name}" id="name" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('patronymic')}"
-              th:errors="*{patronymic}">Surname Error</span>
-        <label for="patronymic">Отчество: </label>
-        <input type="text" th:field="*{patronymic}" id="patronymic" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('surname')}"
+                          th:errors="*{surname}">Surname Error</span>
+                    <label for="surname">Фамилия: </label>
+                    <input type="text" th:field="*{surname}" id="surname" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('role')}"
-              th:errors="*{role}">Role Error</span>
-        <label for="role">Должность: </label>
-        <input type="text" th:field="*{role}" id="role" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('patronymic')}"
+                          th:errors="*{patronymic}">Surname Error</span>
+                    <label for="patronymic">Отчество: </label>
+                    <input type="text" th:field="*{patronymic}" id="patronymic" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('division')}"
-              th:errors="*{division}">Division Error</span>
-        <label for="division">Подразделение: </label>
-        <input type="text" th:field="*{division}" id="division" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('role')}"
+                          th:errors="*{role}">Role Error</span>
+                    <label for="role">Должность: </label>
+                    <input type="text" th:field="*{role}" id="role" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('faculty')}"
-              th:errors="*{faculty}">Faculty Error</span>
-        <label for="faculty">Факультет: </label>
-        <input type="text" th:field="*{faculty}" id="faculty" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('division')}"
+                          th:errors="*{division}">Division Error</span>
+                    <label for="division">Подразделение: </label>
+                    <input type="text" th:field="*{division}" id="division" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('specialization')}"
-              th:errors="*{specialization}">Specialization Error</span>
-        <label for="specialization">Специальность: </label>
-        <input type="text" th:field="*{specialization}" id="specialization" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('faculty')}"
+                          th:errors="*{faculty}">Faculty Error</span>
+                    <label for="faculty">Факультет: </label>
+                    <input type="text" th:field="*{faculty}" id="faculty" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('course')}"
-              th:errors="*{course}">Course Error</span>
-        <label for="course">Курс: </label>
-        <input type="number" th:field="*{course}" id="course" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('specialization')}"
+                          th:errors="*{specialization}">Specialization Error</span>
+                    <label for="specialization">Специальность: </label>
+                    <input type="text" th:field="*{specialization}" id="specialization" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('groupNum')}"
-              th:errors="*{groupNum}">GroupNum Error</span>
-        <label for="groupNum">Номер группы: </label>
-        <input type="number" th:field="*{groupNum}" id="groupNum" /><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('course')}"
+                          th:errors="*{course}">Course Error</span>
+                    <label for="course">Курс: </label>
+                    <input type="number" th:field="*{course}" id="course" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('info')}"
-              th:errors="*{info}">Info Error</span>
-        <label for="info">Дополнительная информация: </label>
-        <textarea th:field="*{info}" id="info">Вставьте текст</textarea><br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('groupNum')}"
+                          th:errors="*{groupNum}">GroupNum Error</span>
+                    <label for="groupNum">Номер группы: </label>
+                    <input type="number" th:field="*{groupNum}" id="groupNum" /><br/>
+                </div>
 
-        <span class="validationError"
-              th:if="${#fields.hasErrors('photoReq')}"
-              th:errors="*{photoReq}">Photo Error</span>
-        <label for="photoReq">Фотография: </label>
-        <input type="file" name="photoReq" id="photoReq"/>
-        <br/>
+                <div class="form__field">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('info')}"
+                          th:errors="*{info}">Info Error</span>
+                    <label for="info">Дополнительная информация: </label>
+                    <textarea th:field="*{info}" id="info">Вставьте текст</textarea><br/>
+                </div>
 
-        <input type="submit" value="Добавить пользователя">
-        
-    </form>
+                <div class="form__field_photo">
+                    <span class="validationError"
+                          th:if="${#fields.hasErrors('photoReq')}"
+                          th:errors="*{photoReq}">Photo Error</span>
+                    <label for="photoReq">Фотография: </label>
+                    <input type="file" name="photoReq" id="photoReq"/>
+                </div>
 
+                <br/>
+                <div class="form__buttons">
+                    <div class="form__button-input">
+                        <input type="submit" value="Добавить пользователя">
+                    </div>
+                </div>
+
+                <div th:if="${person.hasPhoto()}">
+                    <img th:src="'/img/' + ${person.photo.name}" alt="" src="">
+                </div>
+
+            </form>
+        </div>
+    </main>
+</div>
 </body>
+
+
 </html>
