@@ -1,25 +1,168 @@
 <!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       lang="en">
 <head>
     <title>Панель администрирования</title>
     <link rel="stylesheet" th:href="@{/styles.css}" />
+
 </head>
 
 <body>
 
-    <div th:each="person: ${unacceptedList}">
+    <div th:each="person: ${page}">
         <a th:href="'/person/' + ${person.id}">
             <div>
-                <span th:text="${person.name}"></span>
                 <span th:text="${person.surname}"></span>
+                <span th:text="${person.name}"></span>
                 <span th:text="${person.email}"></span>
             </div>
         </a>
     </div><br/><br/>
 
-    <div th:value="${unacceptedList.size()}"></div>
+    <div>
+        <span>Показаны</span>
+        <span th:if="${pageNum}*${pageSize} + 1 <= ${total}"
+                th:text="${pageNum}*${pageSize} + 1"></span>
+        <span th:if="${pageNum}*${pageSize} + 1 > ${total}">None</span>
+        <span>-</span>
+        <span th:if="(${pageNum}+1)*${pageSize} <= ${total}"
+              th:text="(${pageNum}+1)*${pageSize}"></span>
+        <span th:if="(${pageNum}+1)*${pageSize} > ${total}"
+              th:text="${total}"></span>
+        <span>из</span>
+        <span th:text="${total}"></span>
+    </div>
+
+    <ul>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum > 0}"
+               th:href = "${url} + '?page=' + (${pageNum}-1)"><-</a>
+            <span th:if="${pageNum == 0}">|<-</span>
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum != 0}"
+               th:href = "${url} + '?page=0'">1</a>
+            <span th:if="${pageNum == 0}">1</span>
+        </li>
+
+        <li class="elemOfPageNums">
+            <span th:if="${pageNum >= 4}">...</span>
+
+            <a th:if="${pageNum < 4 && pageNum != 1}"
+               th:href = "${url} + '?page=1'">2</a>
+
+            <a th:if="${pageNum == 1}">2</a>
+
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum >= 4 && pageNum < (((total - 1)/pageSize) - 4)}"
+               th:href = "${url} + '?page=' + (${pageNum}-1)"
+               th:text="${pageNum}">Предыдущая</a>
+
+            <a th:if="${pageNum >= (((total - 1)/pageSize) - 4)}"
+               th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 6})"
+               th:text="${((total - 1)/pageSize) - 5}"></a>
+
+            <span th:if="${pageNum == 2}">3</span>
+
+            <a th:if="${pageNum < 4 && pageNum != 2}"
+               th:href="${url} + '?page=2'">3</a>
+
+        </li>
+
+        <li class="elemOfPageNums">
+
+            <span th:if="${pageNum >= 4 && pageNum < (((total - 1)/pageSize) - 4)}"
+               th:text="${pageNum}+1">Настоящая</span>
+
+            <a th:if="${pageNum >= (((total - 1)/pageSize) - 4)}"
+               th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 5})"
+               th:text="${((total - 1)/pageSize) - 4}"></a>
+
+            <a th:if="${pageNum < 4 && pageNum != 3}"
+            th:href="${url} + '?page=3'">4</a>
+
+            <span th:if="${pageNum == 3}">4</span>
+
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum != ((total - 1)/pageSize) - 4 && pageNum <= ((total - 1)/pageSize) - 4 && pageNum >= 4}"
+               th:href = "${url} + '?page=' + (${pageNum}+1)"
+               th:text="${pageNum}+2"></a>
+
+            <a th:if="${pageNum > ((total - 1)/pageSize) - 4 && pageNum != ((total - 1)/pageSize) - 4}"
+               th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 4})"
+               th:text="${((total - 1)/pageSize) - 3}"></a>
+
+            <span th:if="${pageNum == ((total - 1)/pageSize) - 4}"
+                  th:text="${((total - 1)/pageSize) - 3}"></span>
+
+            <a th:if="${pageNum < 4}"
+               th:href="${url} + '?page=4'">5</a>
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum != ((total - 1)/pageSize) - 3 && pageNum < ((total - 1)/pageSize) - 4 && pageNum >= 4}"
+               th:href = "${url} + '?page=' + (${pageNum}+2)"
+               th:text="${pageNum}+3"></a>
+
+            <a th:if="${pageNum >= ((total - 1)/pageSize) - 4 && pageNum != ((total - 1)/pageSize) - 3}"
+               th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 3})"
+               th:text="${((total - 1)/pageSize) - 2}"></a>
+
+            <span th:if="${pageNum == ((total - 1)/pageSize) - 3}"
+                  th:text="${((total - 1)/pageSize) - 2}"></span>
+
+            <a th:if="${pageNum < 4}"
+               th:href="${url} + '?page=5'">6</a>
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum >= 4 && pageNum < ((total - 1)/pageSize) - 4}"
+               th:href = "${url} + '?page=' + (${pageNum}+3)"
+               th:text="${pageNum}+4">Настоящая + 3</a>
+
+            <a th:if="${pageNum >= ((total - 1)/pageSize) - 4 && pageNum != ((total - 1)/pageSize) - 2}"
+            th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 2})"
+            th:text="${((total - 1)/pageSize) - 1}"></a>
+
+            <span th:if="${pageNum == ((total - 1)/pageSize) - 2}"
+                  th:text="${((total - 1)/pageSize) - 1}"></span>
+
+        </li>
+
+        <li class="elemOfPageNums">
+            <span th:if="${pageNum < ((total - 1)/pageSize) - 5}">...</span>
+
+            <a th:if="${pageNum >= ((total - 1)/pageSize) - 5 && pageNum != ((total - 1)/pageSize) - 1}"
+               th:href="${url} + '?page=' + (${((total - 1)/pageSize) - 1})"
+               th:text="${((total - 1)/pageSize)}">Предпоследняя</a>
+
+            <span th:if="${pageNum == ((total - 1)/pageSize) - 1}"
+                th:text="${((total - 1)/pageSize)}"></span>
+        </li>
+
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum != (((total - 1)/pageSize))}"
+               th:href = "${url} + '?page=' + (${((total - 1)/pageSize)})"
+               th:text = "${((total - 1)/pageSize) + 1}">Последняя страница</a>
+            <span th:if="${pageNum == (((total - 1)/pageSize))}"
+                  th:text = "${((total - 1)/pageSize) + 1}"></span>
+        </li>
+
+        <li class="elemOfPageNums">
+            <a th:if="${pageNum != (((total - 1)/pageSize))}"
+               th:href="${url} + '?page=' + (${pageNum}+1)">-></a>
+            <span th:if="${pageNum == (((total - 1)/pageSize))}">->|</span>
+        </li>
+    </ul>
 
 </body>
 </html>
