@@ -135,6 +135,9 @@
             <span th:if="${pageNum == ((total - 1)/pageSize) - 2}"
                   th:text="${((total - 1)/pageSize) - 1}"></span>
 
+            <a th:if="${pageNum < 4}"
+               th:href="${url} + '?page=6'">7</a>
+
         </li>
 
         <li class="elemOfPageNums">

@@ -19,9 +19,9 @@ import org.springframework.web.bind.support.SessionStatus;
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    final UserRepository userRepository;
-    final RoleRepository roleRepository;
-    final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public RegistrationController(UserRepository userRepository,

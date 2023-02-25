@@ -1,11 +1,11 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import jakarta.validation.Valid;
-import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
-import org.sfedueye.crudwebappsfedueye.web.data.service.PhotoValidator;
 import org.sfedueye.crudwebappsfedueye.web.data.model.Person;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PersonRepository;
+import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
 import org.sfedueye.crudwebappsfedueye.web.data.service.PersonService;
+import org.sfedueye.crudwebappsfedueye.web.data.service.PhotoValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 

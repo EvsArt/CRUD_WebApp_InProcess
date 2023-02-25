@@ -1,9 +1,7 @@
 package org.sfedueye.crudwebappsfedueye.web.data.model;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Date;

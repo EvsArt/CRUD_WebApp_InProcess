@@ -2,11 +2,9 @@ package org.sfedueye.crudwebappsfedueye.security;
 
 import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,6 +44,10 @@ public class SecurityConfiguration {
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 .and()
+                .cors()
+                .and()
+                .csrf()
+                .disable()
                 .build();
     }
 
