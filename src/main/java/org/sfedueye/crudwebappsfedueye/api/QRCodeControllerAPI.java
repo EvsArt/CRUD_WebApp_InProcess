@@ -4,8 +4,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.coyote.Response;
+import org.hibernate.internal.log.SubSystemLogging;
 import org.sfedueye.crudwebappsfedueye.api.qrcode.QRPermanentGenerator;
 import org.sfedueye.crudwebappsfedueye.api.qrcode.RequestFormByQRCode;
+import org.sfedueye.crudwebappsfedueye.api.qrcode.ResponseFormByQRCode;
 import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,32 +31,28 @@ public class QRCodeControllerAPI {
 
     // DELETE ME
     @GetMapping // DELETE ME
-    public int f(){ // DELETE ME
+    public String f(){ // DELETE ME
         return QRPermanentGenerator.getKey();   // DELETE ME
     }   // DELETE ME
     // DELETE ME
 
     @PostMapping(consumes = "application/json")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void checkUserAfterScanningQR(@RequestBody RequestFormByQRCode form,
-                                                   @RequestParam("randomKey") int key,
-                                                   HttpServletResponse response) {
+    public ResponseFormByQRCode checkUserAfterScanningQR(@RequestBody RequestFormByQRCode form) {
         User user;
 
-        if(key != QRPermanentGenerator.getKey()) response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-        else {
-            if (repository.existsById(form.getUserId())) {
+        if(!form.getRandomKey().equals(QRPermanentGenerator.getKey()))
+            return new ResponseFormByQRCode(false, "Попробуйте ещё раз");
 
-                user = repository.findUserById(form.getUserId());
+        if (!repository.existsById(form.getUserId()))
+            return new ResponseFormByQRCode(false, "Вас нет в нашей базе данных!");
 
-                if (form.getDataHashCode() != user.hashCode() || user.isEnabled()) {
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                } else {
-                    response.setStatus(HttpServletResponse.SC_ACCEPTED);
-                }
+        user = repository.findUserById(form.getUserId());
+        if (form.getDataHashCode() != user.hashCode() || !user.isEnabled())
+            return new ResponseFormByQRCode(false, "Данные пользователя не совпадают с данными на сервере или пользователь заблокирован");
 
-            }else response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        }
+        return new ResponseFormByQRCode(true, "Доступ разрешён");
+
+        //TODO(Организовать какое-то действие в случае успеха)
     }
 
 

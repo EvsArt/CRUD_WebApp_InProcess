@@ -14,9 +14,9 @@ public class QRPermanentGenerator implements Runnable, CommandLineRunner {
 
         private final QRGenerator qrGenerator;
 
-        private static int key;
+        private static String key;
 
-        public static int getKey() {
+        public static String getKey() {
             return key;
         }
 
