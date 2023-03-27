@@ -17,7 +17,7 @@
     <main class="page">
         <div class="page__form">
             <h1 class="form__title">Добавление нового пользователя</h1>
-            <form class="form__fields" method="POST" th:action="@{/newperson}" th:object="${person}" id="newUserForm" enctype="multipart/form-data">
+            <form class="form__fields" method="POST" th:action="@{/newperson}" th:object="${userInfo}" id="newUserForm" enctype="multipart/form-data">
 
                 <div class="form__field">
                     <span class="validationError"
@@ -122,8 +122,8 @@
                     </div>
                 </div>
 
-                <div th:if="${person.hasPhoto()}">
-                    <img th:src="'/img/' + ${person.photo.name}" alt="" src="">
+                <div th:if="${userInfo.hasPhoto()}">
+                    <img th:src="'/img/' + ${userInfo.photo.name}" alt="" src="">
                 </div>
 
             </form>

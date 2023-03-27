@@ -11,7 +11,7 @@ import java.util.Date;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Person {
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "person_generator")

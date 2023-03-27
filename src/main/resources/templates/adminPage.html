@@ -11,12 +11,12 @@
 
 <body>
 
-    <div th:each="person: ${page}">
-        <a th:href="'/person/' + ${person.id}">
+    <div th:each="userInfo: ${page}">
+        <a th:href="'/userInfo/' + ${userInfo.id}">
             <div>
-                <span th:text="${person.surname}"></span>
-                <span th:text="${person.name}"></span>
-                <span th:text="${person.email}"></span>
+                <span th:text="${userInfo.surname}"></span>
+                <span th:text="${userInfo.name}"></span>
+                <span th:text="${userInfo.email}"></span>
             </div>
         </a>
     </div><br/><br/>

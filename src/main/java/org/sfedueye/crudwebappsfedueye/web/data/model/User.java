@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "usver")
+@Table(name = "usver")  // Because "user" is busy by Postgres
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User implements UserDetails {
@@ -39,6 +39,9 @@ public class User implements UserDetails {
 
     @ManyToOne
     private Role role;
+
+    @OneToOne
+    private UserInfo userInfo;
 
 
     @Override

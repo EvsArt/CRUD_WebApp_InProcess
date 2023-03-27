@@ -1,8 +1,8 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import jakarta.validation.Valid;
-import org.sfedueye.crudwebappsfedueye.web.data.model.Person;
-import org.sfedueye.crudwebappsfedueye.web.data.repository.PersonRepository;
+import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
+import org.sfedueye.crudwebappsfedueye.web.data.repository.UserInfoRepository;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
 import org.sfedueye.crudwebappsfedueye.web.data.service.PersonService;
 import org.sfedueye.crudwebappsfedueye.web.data.service.PhotoValidator;
@@ -21,15 +21,15 @@ import java.util.Date;
 @RequestMapping("/newperson")
 public class NewPersonController {
 
-    private final PersonRepository personRepository;
+    private final UserInfoRepository userInfoRepository;
     private final PhotoValidator photoValidator;
     private final PersonService personService;
 
-    public NewPersonController(PersonRepository personRepository,
+    public NewPersonController(UserInfoRepository userInfoRepository,
                                PhotoRepository photoRepository,
                                PhotoValidator photoValidator,
                                PersonService personService){
-        this.personRepository = personRepository;
+        this.userInfoRepository = userInfoRepository;
         this.photoValidator = photoValidator;
         this.personService = personService;
     }
@@ -40,29 +40,29 @@ public class NewPersonController {
     }
 
     @ModelAttribute(name = "person")
-    public Person person(){
-        return new Person();
+    public UserInfo person(){
+        return new UserInfo();
     }
 
 
     @PostMapping
-    public String processPerson(@ModelAttribute("person") @Valid Person person,
+    public String processPerson(@ModelAttribute("person") @Valid UserInfo userInfo,
                                 Errors errors,
                                 SessionStatus sessionStatus) throws IOException {
 
 
-        photoValidator.validate(person.getPhotoReq(), errors);
+        photoValidator.validate(userInfo.getPhotoReq(), errors);
         if(errors.hasErrors()){
             return "newPerson";
         }
 
-        person.setAddingTime(new Date());
-        personService.uploadPhoto(person);
+        userInfo.setAddingTime(new Date());
+        personService.uploadPhoto(userInfo);
 
-        if(personRepository.existsByEmail(person.getEmail())) {
-            person.setId(personRepository.findByEmail(person.getEmail()).getId());
+        if(userInfoRepository.existsByEmail(userInfo.getEmail())) {
+            userInfo.setId(userInfoRepository.findByEmail(userInfo.getEmail()).getId());
         }   // Rewriting old entry if this email has already exist
-        personRepository.save(person);
+        userInfoRepository.save(userInfo);
 
         sessionStatus.setComplete();
 

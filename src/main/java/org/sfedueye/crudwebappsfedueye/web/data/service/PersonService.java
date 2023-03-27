@@ -1,6 +1,6 @@
 package org.sfedueye.crudwebappsfedueye.web.data.service;
 
-import org.sfedueye.crudwebappsfedueye.web.data.model.Person;
+import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
 import org.sfedueye.crudwebappsfedueye.web.data.model.Photo;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
 import org.springframework.stereotype.Service;
@@ -22,10 +22,10 @@ public class PersonService {
         this.photoRepository = photoRepository;
     }
 
-    public void uploadPhoto(Person person) throws IOException {
+    public void uploadPhoto(UserInfo userInfo) throws IOException {
 
-        MultipartFile photo = person.getPhotoReq();
-        String fileName = person.getEmail().split("@")[0] + ".png";  // Email without domain
+        MultipartFile photo = userInfo.getPhotoReq();
+        String fileName = userInfo.getEmail().split("@")[0] + ".png";  // Email without domain
 
         if(!photo.getContentType().equals("application/octet-stream")) {
 
@@ -37,9 +37,9 @@ public class PersonService {
             }
             photoEnt.setAddingTime(new Date());
 
-            person.setPhoto(photoEnt);
+            userInfo.setPhoto(photoEnt);
         }else{
-            person.setPhoto(photoRepository.findByName(fileName));
+            userInfo.setPhoto(photoRepository.findByName(fileName));
         }
     }
 }
