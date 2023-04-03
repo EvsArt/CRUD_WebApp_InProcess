@@ -1,5 +1,6 @@
-package org.sfedueye.crudwebappsfedueye.api;
+package org.sfedueye.crudwebappsfedueye.api.registration;
 
+import org.sfedueye.crudwebappsfedueye.api.login.LoginResponseForm;
 import org.sfedueye.crudwebappsfedueye.web.data.model.RegistrationForm;
 import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.RoleRepository;
@@ -27,8 +28,17 @@ public class NewPersonControllerAPI {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createNewPerson(@RequestBody RegistrationForm form){
-        return userRepository.save(form.toUser(roleRepository, passwordEncoder));
+    public LoginResponseForm createNewPerson(@RequestBody RegistrationForm form){
+        try {
+            User user = userRepository.save(form.toUser(roleRepository, passwordEncoder));
+            return new LoginResponseForm(true, "Регистрация завершена успешно!",
+                    user.getId(), user.hashCode());
+        }catch (Exception e){
+            e.printStackTrace();
+            return new LoginResponseForm(false, "Возникла ошибка на сервере",
+                    null, null);
+        }
+
     }
 
 }

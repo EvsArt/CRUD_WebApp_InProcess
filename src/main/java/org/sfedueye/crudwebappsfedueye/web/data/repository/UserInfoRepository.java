@@ -10,6 +10,4 @@ public interface UserInfoRepository extends CrudRepository<UserInfo, Long> {
     Page<UserInfo> findAllByAcceptedIsTrueOrderBySurname(Pageable pageable);
     int countAllByAcceptedIsFalse();
     int countAllByAcceptedIsTrue();
-    boolean existsByEmail(String email);
-    UserInfo findByEmail(String email);
 }

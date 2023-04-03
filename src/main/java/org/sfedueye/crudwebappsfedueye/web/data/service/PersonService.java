@@ -1,5 +1,6 @@
 package org.sfedueye.crudwebappsfedueye.web.data.service;
 
+import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
 import org.sfedueye.crudwebappsfedueye.web.data.model.Photo;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
@@ -22,10 +23,10 @@ public class PersonService {
         this.photoRepository = photoRepository;
     }
 
-    public void uploadPhoto(UserInfo userInfo) throws IOException {
+    public void uploadPhoto(User user) throws IOException {
 
-        MultipartFile photo = userInfo.getPhotoReq();
-        String fileName = userInfo.getEmail().split("@")[0] + ".png";  // Email without domain
+        MultipartFile photo = user.getUserInfo().getPhotoReq();
+        String fileName = user.getEmail().split("@")[0] + ".png";  // Email without domain
 
         if(!photo.getContentType().equals("application/octet-stream")) {
 
@@ -37,9 +38,9 @@ public class PersonService {
             }
             photoEnt.setAddingTime(new Date());
 
-            userInfo.setPhoto(photoEnt);
+            user.getUserInfo().setPhoto(photoEnt);
         }else{
-            userInfo.setPhoto(photoRepository.findByName(fileName));
+            user.getUserInfo().setPhoto(photoRepository.findByName(fileName));
         }
     }
 }

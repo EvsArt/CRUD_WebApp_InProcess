@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ResponseFormByQRCode {
+public class QRResponseForm {
 
     private boolean access;
 

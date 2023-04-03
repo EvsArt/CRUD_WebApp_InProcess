@@ -47,12 +47,9 @@ public class RegistrationController {
             return "registrationPage";
         }
 
-        if (form.getPassword().equals(form.getConfirmPassword())) {
-            userRepository.save(form.toUser(roleRepository, passwordEncoder));
-        }else{
-            errors.rejectValue("confirmPassword", "PasswordsEquals", "Пароли не совпадают!");
-            return "registrationPage";
-        }
+
+        userRepository.save(form.toUser(roleRepository, passwordEncoder));
+
         sessionStatus.setComplete();
         return "redirect:/login";
 

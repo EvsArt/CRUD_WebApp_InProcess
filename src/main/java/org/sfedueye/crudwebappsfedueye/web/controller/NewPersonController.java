@@ -1,9 +1,11 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import jakarta.validation.Valid;
+import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.UserInfoRepository;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
+import org.sfedueye.crudwebappsfedueye.web.data.repository.UserRepository;
 import org.sfedueye.crudwebappsfedueye.web.data.service.PersonService;
 import org.sfedueye.crudwebappsfedueye.web.data.service.PhotoValidator;
 import org.springframework.stereotype.Controller;
@@ -21,15 +23,14 @@ import java.util.Date;
 @RequestMapping("/newperson")
 public class NewPersonController {
 
-    private final UserInfoRepository userInfoRepository;
+    private final UserRepository userRepository;
     private final PhotoValidator photoValidator;
     private final PersonService personService;
 
-    public NewPersonController(UserInfoRepository userInfoRepository,
-                               PhotoRepository photoRepository,
+    public NewPersonController(UserRepository userRepository,
                                PhotoValidator photoValidator,
                                PersonService personService){
-        this.userInfoRepository = userInfoRepository;
+        this.userRepository = userRepository;
         this.photoValidator = photoValidator;
         this.personService = personService;
     }
@@ -46,23 +47,23 @@ public class NewPersonController {
 
 
     @PostMapping
-    public String processPerson(@ModelAttribute("person") @Valid UserInfo userInfo,
+    public String processPerson(@ModelAttribute("person") @Valid User user,
                                 Errors errors,
                                 SessionStatus sessionStatus) throws IOException {
 
 
-        photoValidator.validate(userInfo.getPhotoReq(), errors);
+        photoValidator.validate(user.getUserInfo().getPhotoReq(), errors);
         if(errors.hasErrors()){
             return "newPerson";
         }
 
-        userInfo.setAddingTime(new Date());
-        personService.uploadPhoto(userInfo);
+        user.getUserInfo().setAddingTime(new Date());
+        personService.uploadPhoto(user);
 
-        if(userInfoRepository.existsByEmail(userInfo.getEmail())) {
-            userInfo.setId(userInfoRepository.findByEmail(userInfo.getEmail()).getId());
+        if(userRepository.existsByEmail(user.getEmail())) {
+            user.setId(userRepository.findByEmail(user.getEmail()).getId());
         }   // Rewriting old entry if this email has already exist
-        userInfoRepository.save(userInfo);
+        userRepository.save(user);
 
         sessionStatus.setComplete();
 
