@@ -32,7 +32,6 @@ public class UserDataController {
             if(usInfo.getSurname()!=null) data.setSurname(usInfo.getSurname());
             if(usInfo.getPatronymic()!=null) data.setPatronymic(usInfo.getPatronymic());
             if(usInfo.getRole()!=null) data.setRole(usInfo.getRole());
-            if(usInfo.getDivision()!=null) data.setDivision(usInfo.getDivision());
             if(usInfo.getFaculty()!=null) data.setFaculty(usInfo.getFaculty());
             if(usInfo.getSpecialization()!=null) data.setSpecialization(usInfo.getSpecialization());
             if(usInfo.getCourse()!=null) data.setCourse(usInfo.getCourse());

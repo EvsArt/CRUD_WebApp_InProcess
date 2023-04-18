@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserInfoRepository extends CrudRepository<UserInfo, Long> {
-    Page<UserInfo> findAllByAcceptedIsFalseOrderBySurname(Pageable pageable);
-    Page<UserInfo> findAllByAcceptedIsTrueOrderBySurname(Pageable pageable);
-    int countAllByAcceptedIsFalse();
-    int countAllByAcceptedIsTrue();
+    Page<UserInfo> findAllByOrderBySurname(Pageable pageable);
+    int countAllBy();
+    boolean existsByEmail(String email);
+    UserInfo findByEmail(String email);
 }

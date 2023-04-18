@@ -32,6 +32,10 @@ public class RegistrationForm {
     @Size(max = 40, message = "Слишком длинный пароль!")
     private String password;
 
+    @Size(min = 8, message = "Не менее 8 символов!")
+    @Size(max = 40, message = "Слишком длинный пароль!")
+    private String confirmPassword;
+
     public User toUser(RoleRepository repo, PasswordEncoder passwordEncoder){
         return new User(email, passwordEncoder.encode(password), repo.findRoleByName("USER"));
     }

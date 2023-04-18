@@ -15,13 +15,13 @@
   Отчество: <span th:text="${userInfo.patronymic}">Неизвестно</span><br>
   Почта: <span th:text="${userInfo.email}">Неизвестно</span><br>
   Должность: <span th:text="${userInfo.role}">Неизвестно</span><br>
-  Подразделение: <span th:text="${userInfo.division}">Неизвестно</span><br>
   Факультет: <span th:text="${userInfo.faculty}">Неизвестно</span><br>
   Специальность: <span th:text="${userInfo.specialization}">Неизвестно</span><br>
   Курс: <span th:text="${userInfo.course}">Неизвестно</span><br>
   Номер группы: <span th:text="${userInfo.groupNum}">Неизвестно</span><br>
   Дополнительная информация: <span th:text="${userInfo.info}">Неизвестно</span><br>
-  Время добавления: <span th:text="${userInfo.addingTime}">Неизвестно</span><br>
+  Время обновления: <span th:text="${userInfo.updatingTime}">Неизвестно</span><br>
+  Активен: <span th:text="${isEnable}">Неизвестно</span>
 
   <div th:if="${userInfo.hasPhoto()}">
     <img th:src="'/img/' + ${userInfo.photo.name}" alt="" src="">
@@ -31,7 +31,8 @@
 
 <a th:href="'/userInfo/' + ${userInfo.id} + '/edit'">Редактировать пользователя</a>
 <br>
-<a th:href="'/userInfo/' + ${userInfo.id} + '/delete'">Удалить пользователя</a>
+<a th:if="${!isDelete}" th:href="'/userInfo/' + ${userInfo.id} + '/delete'">Удалить пользователя</a>
+<a th:if="${isDelete}" th:href="'/userInfo/' + ${userInfo.id} + '/recover'">Восстановить пользователя</a>
 
 
 </body>

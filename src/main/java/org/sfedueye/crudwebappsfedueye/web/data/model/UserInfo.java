@@ -2,7 +2,10 @@ package org.sfedueye.crudwebappsfedueye.web.data.model;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,13 +28,15 @@ public class UserInfo {
     @OneToOne(cascade = CascadeType.ALL)
     private Photo photo = null; // Field for Photo table
 
-    private Date addingTime;
-
-    private boolean accepted;
+    private Date updatingTime;
 
     public boolean hasPhoto(){
         return photo != null;
     }
+
+    @Pattern(regexp = "^[a-z]+@sfedu\\.ru$", message = "Почта должна относиться к @sfedu.ru")
+    @Size(max = 200, message = "Длина поля не более 200 символов!")
+    protected String email;
 
     @Pattern(regexp = "^[A-Z|А-Я][a-z|а-я]*$", message = "Только русские или английские буквы, первая буква заглавная!")
     @Size(max = 200, message = "Длина поля не более 200 символов!")
@@ -50,10 +55,6 @@ public class UserInfo {
     @Size(max = 200, message = "Длина поля не более 200 символов!")
 //    @NotBlank(message = "Поле не может быть пустым")
     protected String role;
-
-    @Size(max = 100, message = "Длина поля не более 100 символов!")
-//    @NotBlank(message = "Поле не может быть пустым")
-    protected String division;
 
     @Size(max = 100, message = "Длина поля не более 100 символов!")
 //    @NotBlank(message = "Поле не может быть пустым")

@@ -17,30 +17,14 @@
     <main class="page">
         <div class="page__form">
             <h1 class="form__title">Добавление нового пользователя</h1>
-            <form class="form__fields" method="POST" th:action="@{/newperson}" th:object="${registrationForm}" id="newUserForm" enctype="multipart/form-data">
+            <form class="form__fields" method="POST" th:action="@{/updateuser}" th:object="${userInfo}" id="newUserForm" enctype="multipart/form-data">
 
                 <div class="form__field">
                     <span class="validationError"
                           th:if="${#fields.hasErrors('email')}"
                           th:errors="*{email}">Email Error</span>
                     <label for="email">Почта sfedu: </label>
-                    <input type="text" th:field="*{email}" id="email" /><br/>
-                </div>
-
-                <div class="form__field">
-                    <span class="validationError"
-                          th:if="${#fields.hasErrors('password')}"
-                          th:errors="*{password}">Password Error</span>
-                    <label for="password">Пароль: </label>
-                    <input type="text" th:field="*{password}" id="password" /><br/>
-                </div>
-
-                <div class="form__field">
-                    <span class="validationError"
-                        th:if="${#fields.hasErrors('confirmPassword')}"
-                        th:errors="*{confirmPassword}">Email Error</span>
-                    <label for="confirmPassword">Почта sfedu: </label>
-                    <input type="text" th:field="*{confirmPassword}" id="confirmPassword" /><br/>
+                    <input type="text" readonly th:field="*{email}" id="email" /><br/>
                 </div>
 
                 <div class="form__field">
@@ -73,14 +57,6 @@
                           th:errors="*{role}">Role Error</span>
                     <label for="role">Должность: </label>
                     <input type="text" th:field="*{role}" id="role" /><br/>
-                </div>
-
-                <div class="form__field">
-                    <span class="validationError"
-                          th:if="${#fields.hasErrors('division')}"
-                          th:errors="*{division}">Division Error</span>
-                    <label for="division">Подразделение: </label>
-                    <input type="text" th:field="*{division}" id="division" /><br/>
                 </div>
 
                 <div class="form__field">

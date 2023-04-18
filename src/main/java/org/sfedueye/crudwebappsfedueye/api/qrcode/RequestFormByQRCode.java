@@ -1,6 +1,5 @@
 package org.sfedueye.crudwebappsfedueye.api.qrcode;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
 @Data

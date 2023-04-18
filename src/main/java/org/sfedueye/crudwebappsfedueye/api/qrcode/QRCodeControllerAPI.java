@@ -1,8 +1,5 @@
 package org.sfedueye.crudwebappsfedueye.api.qrcode;
 
-import org.sfedueye.crudwebappsfedueye.api.qrcode.QRPermanentGenerator;
-import org.sfedueye.crudwebappsfedueye.api.qrcode.RequestFormByQRCode;
-import org.sfedueye.crudwebappsfedueye.api.qrcode.QRResponseForm;
 import org.sfedueye.crudwebappsfedueye.web.data.model.User;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.UserRepository;
 import org.springframework.web.bind.annotation.*;

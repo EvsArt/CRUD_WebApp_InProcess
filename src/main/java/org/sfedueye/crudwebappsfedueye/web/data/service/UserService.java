@@ -1,8 +1,7 @@
 package org.sfedueye.crudwebappsfedueye.web.data.service;
 
-import org.sfedueye.crudwebappsfedueye.web.data.model.User;
-import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
 import org.sfedueye.crudwebappsfedueye.web.data.model.Photo;
+import org.sfedueye.crudwebappsfedueye.web.data.model.UserInfo;
 import org.sfedueye.crudwebappsfedueye.web.data.repository.PhotoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,21 +11,21 @@ import java.io.IOException;
 import java.util.Date;
 
 @Service
-public class PersonService {
+public class UserService {
 
     private final File uploadPhotoDir;
     private final PhotoRepository photoRepository;
 
-    public PersonService(File uploadPhotoDir,
-                         PhotoRepository photoRepository) {
+    public UserService(File uploadPhotoDir,
+                       PhotoRepository photoRepository) {
         this.uploadPhotoDir = uploadPhotoDir;
         this.photoRepository = photoRepository;
     }
 
-    public void uploadPhoto(User user) throws IOException {
+    public void uploadPhoto(UserInfo userInfo) throws IOException {
 
-        MultipartFile photo = user.getUserInfo().getPhotoReq();
-        String fileName = user.getEmail().split("@")[0] + ".png";  // Email without domain
+        MultipartFile photo = userInfo.getPhotoReq();
+        String fileName = userInfo.getEmail().split("@")[0] + ".png";  // Email without domain
 
         if(!photo.getContentType().equals("application/octet-stream")) {
 
@@ -38,9 +37,9 @@ public class PersonService {
             }
             photoEnt.setAddingTime(new Date());
 
-            user.getUserInfo().setPhoto(photoEnt);
+            userInfo.setPhoto(photoEnt);
         }else{
-            user.getUserInfo().setPhoto(photoRepository.findByName(fileName));
+            userInfo.setPhoto(photoRepository.findByName(fileName));
         }
     }
 }

@@ -1,7 +1,6 @@
 package org.sfedueye.crudwebappsfedueye.web.controller;
 
 import org.sfedueye.crudwebappsfedueye.web.data.repository.UserInfoRepository;
-import org.sfedueye.crudwebappsfedueye.web.data.repository.UserRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -13,25 +12,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserRepository userRepository;
+    private final UserInfoRepository userInfoRepository;
 
-    public AdminController(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public AdminController(UserInfoRepository userInfoRepository){
+        this.userInfoRepository = userInfoRepository;
     }
 
     @GetMapping()
     public String admin(){
-        return "redirect:/admin/unacceptedlist";
+        return "redirect:/admin/userslist";
     }
 
-    @GetMapping("/unacceptedlist")
+    @GetMapping("/userslist")
     public String adminPage(Model model,
                             @PageableDefault(size = 15) Pageable pageable
     ){
 
-        model.addAttribute("page", userRepository.findAllByUserInfo_AcceptedIsTrueOrderByEmail(pageable));
-        model.addAttribute("url", "/admin/unacceptedlist");
-        model.addAttribute("total", userRepository.countAllByUserInfo_AcceptedIsTrue());
+        model.addAttribute("page", userInfoRepository.findAllByOrderBySurname(pageable));
+        model.addAttribute("url", "/admin/userslist");
+        model.addAttribute("total", userInfoRepository.countAllBy());
         model.addAttribute("pageNum", pageable.getPageNumber());
         model.addAttribute("pageSize", pageable.getPageSize());
 

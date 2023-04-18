@@ -47,6 +47,8 @@ public class User implements UserDetails {
     @OneToOne(cascade=CascadeType.ALL)
     private UserInfo userInfo = new UserInfo();
 
+    private boolean isDeleted;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,6 +77,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return !isDeleted;
     }
 }

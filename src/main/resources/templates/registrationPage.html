@@ -9,15 +9,15 @@
 <div class="wrapper">
     <main class="page">
         <div class="page__form">
-            <h1 class="form__title">Регистрация нового пользователя</h1>
+            <h1 class="form__title">Регистрация пользователя</h1>
             <form class="form__fields" method="POST" th:action="@{/registration}" th:object="${registrationForm}" id="registrationForm" enctype="multipart/form-data">
 
                 <div class="form__field">
                     <span class="validationError"
-                          th:if="${#fields.hasErrors('username')}"
-                          th:errors="*{getEmail}">UserName Error</span>
-                    <label for="username">Никнейм: </label>
-                    <input type="text" th:field="*{getEmail}" id="username" /><br/>
+                          th:if="${#fields.hasErrors('email')}"
+                          th:errors="*{email}">Email Error</span>
+                    <label for="email">Email: </label>
+                    <input type="text" th:field="*{email}" id="email" /><br/>
                 </div>
 
                 <div class="form__field">
